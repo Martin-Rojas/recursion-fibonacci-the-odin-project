@@ -33,4 +33,36 @@ const fibsRec = (n) => {
   return seq;
 };
 
-console.log(fibsRec(8));
+// console.log(fibsRec(8));
+
+const mergeSort = (unSortArray) => {
+  if (unSortArray.length <= 1) return unSortArray;
+
+  /* Slipt array in 2 halves*/
+  const middle = Math.floor(unSortArray.length / 2);
+  const leftHalf = unSortArray.slice(0, middle);
+  const rightHalf = unSortArray.slice(middle);
+
+  /* Recursive call to sort the 2 halves*/
+  const leftSorted = mergeSort(leftHalf);
+  const rightSorted = mergeSort(rightHalf);
+
+  /* Merge the 2 halves*/
+  return merge(leftSorted, rightSorted);
+};
+const merge = (left, right) => {
+  /* Base case*/
+  if (left.length === 0) return right;
+  if (right.length === 0) return left;
+
+  if (left[0] < right[0]) {
+    return [left[0]].concat(merge(left.slice(1), right));
+  } else {
+    return [right[0]].concat(merge(left, right.slice(1)));
+  }
+};
+
+console.log(mergeSort([1, 2, 3, 4, 5]));
+console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1]));
+console.log(mergeSort([105, 79, 100, 110]));
+console.log(mergeSort([]));
