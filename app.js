@@ -16,7 +16,21 @@ const fibs = (arrLenght) => {
   return fibsArr;
 };
 
-console.log(fibs(8) + " =====8");
-console.log(fibs(4) + " ===4");
-console.log(fibs(1) + " ===1");
-console.log(fibs(2) + " ===2");
+// console.log(fibs(8) + " =====8");
+// console.log(fibs(4) + " ===4");
+// console.log(fibs(1) + " ===1");
+// console.log(fibs(2) + " ===2");
+
+const fibsRec = (n) => {
+  if (n === 0) return [];
+  if (n === 1) return [0];
+  if (n === 2) return [0, 1];
+
+  const seq = fibsRec(n - 1);
+
+  seq.push(seq[seq.length - 1] + seq[seq.length - 2]);
+
+  return seq;
+};
+
+console.log(fibsRec(8));
